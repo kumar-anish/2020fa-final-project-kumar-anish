@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 data
 
 # Byte-compiled / optimized / DLL files
@@ -106,3 +107,12 @@ venv.bak/
 .mypy_cache/
 
 .idea
+=======
+*.py[co]
+.idea
+.vscode
+
+coverage.xml
+.coverage
+htmlcov
+>>>>>>> origin/master
