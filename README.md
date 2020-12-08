@@ -1,11 +1,8 @@
-# Pset 0
+# Final Project
 
-***Please review*** 'General Pset Instructions' on Canvas prior to starting this
-assignment!
+***SQL Query Log Analysis*** 
 
-Replace the below with your own build badges:
-
-[![Build Status](https://travis-ci.com/csci-e-29/0000aa-pset-0-starter.svg?branch=master)](https://travis-ci.com/csci-e-29/0000aa-pset-0-starter)
+[![Build Status](https://travis-ci.com/csci-e-29/2020fa-final-project-kumar-anish.svg?branch=master)](https://travis-ci.com/csci-e-29/2020fa-final-project-kumar-anish)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/aaaaa/maintainability)](https://codeclimate.com/repos/aaaaa/maintainability)
 
@@ -13,22 +10,20 @@ Replace the below with your own build badges:
 
 ## Objectives
 
-* Demonstrate mastery of basic python syntax (functions, classes, etc)
-* Track development history with Git/GitHub
-* Set up a CI/CD pipeline using Travis-CI to hold ourselves accountable
-* Measure code quality with testing and Code Climate
-* Build a working and repeatable Python environment
+* DBA is worried about performance of database since we are adding multiple applications and database features in Teradata Vantage. 
+* Some of the applications may be using SQL queries which are not optimized, and some may be using new features of machine learning which may as well impact performance. 
+* It is hard to eyeball so many queries fired on database even if it is result in performance impact. 
+* So, there is a need to automatically find some SQL keywords or expensive functions used in SQL and categorize them as part of recommendation for tuning. 
+* Another way to look at it, if a customer is not using newly available feature of database function. 
+* There may be a case when client is still using deprecated functions in SQL or not using advance features/functions of database and there is an opportunity to advise them to utilize new features for improved performance or new use case. 
 
-### Submission Checklist
 
-* Build badges updated above
-* Code passes tests in Travis on Master Branch
-* Address any major code quality issues on Code Climate
-* Code is auto formatted with [black](https://black.readthedocs.io/en/stable/)
-* You have added relevant test cases and suites
-* The 'answers' stage on Travis successfully completes
-* Answer the quiz questions on Canvas
-* Complete peer review (after submission deadline)
+### Project Scope
+
+* Performing text analysis on relational database query/SQL logs using python library. 
+* Find if there is any relation between database queries and categorize them (kind of find friends of Pset3/nearest neighbor) based on some predefined bucket of keywords/texts (expensive SQL tags/native function) sample. 
+* Summarize the finding and upload the summary to database for further review as a daily report. Based on the report, DBA may act/suggest on improving (database tuning) the performance of queries by adding indexes or changing the query text or model. 
+* Business may suggest client to utilize some of the new features which is not being utilized by client (no nearest neighbor). 
 
 This problem set is designed to be solvable with minimal prep work - you should
 be able to complete it with your own prior knowledge and limited external
@@ -36,163 +31,43 @@ research beyond the provided tutorials. If it proves too challenging, please
 discuss with the teaching staff whether you should consider delaying enrollment
 in this course.
 
-**Please complete this Pset before class begins** if possible.  The refund drop
-date is very early in the semester.
+### Technical Approach
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [Problems](#problems)
-  - [Build badges](#build-badges)
-  - [Pyramid](#pyramid)
-  - [Fibonacci](#fibonacci)
-    - [A better solution](#a-better-solution)
-    - [Generalizing](#generalizing)
-- [Other grading aspects](#other-grading-aspects)
-  - [Testing Quality](#testing-quality)
-    - [Test Coverage](#test-coverage)
-  - [Python Quality](#python-quality)
-  - [Git History](#git-history)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## Problems
-
-### Build badges
-
-Update the build badges at the top of this README, using markdown templates for
-your master branch.
-
-See [Travis](https://docs.travis-ci.com/user/status-images) and [Code
-Climate](https://docs.codeclimate.com/docs/overview#badges) instructions. You
-may add multiple if you'd like for various branches (eg, a 'develop' branch),
-but only one for master is required.
-
-### Pyramid
-
-Write a program that outputs an isosceles pyramid of variable height to the
-terminal using the example characters.  For example, a pyramid of height 2 would
-look like:
-
-```
--=-
-===
-```
-
-While a pyramid of height 3 would look like:
-
-```
---=--
--===-
-=====
-```
-
-Implement the function `print_pyramid` in [pyramid.py](pyramid.py) and print a
-pyramid of height 10.
-
-### Fibonacci
-
-The Fibonacci sequence, `f(i)`, is defined as `(0, 1, 1, 2, 3, 5, 8, ...)` where
-the `i`th number is the sum of the two proceeding numbers, with `f(0) == 0` and
-`f(1) == 1`.  A common implementation of the function adds the result of
-calling itself on a smaller number, i.e.:
-
-```python
-def f(i):
-    return f(i - 1) + f(i - 2)
-```
-
-with appropriate handling of the edge cases.
-
-#### A better solution
-
-What is the value of `f(100000)`? (NB: for brevity, you will work with the last
-eight digits of your answer.)
-
-Note that the common implementation will not work! Your code should execute very
-quickly (do not remove the timeouts in the unittests!).  Describe any changes
-you made in terms of scaling, time/memory tradeoffs, etc, and ensure your
-working function is committed.
-
-Implement your solution in `optimized_fibonacci` within
-[fibonacci.py](fibonacci.py).
-
-#### Generalizing
-
-We can think of this sequence as a special case of a class of sequences where
-the `i`th number is the sum of the previous `n` numbers in the sequence, with
-the first `n` numbers defined arbitrarily.  That is, the Fibonacci sequence is
-a special instance where `n=2` with the first numbers `(0, 1)`.
-
-Design a class where the Fibonacci sequence is an instance (eg, `fib =
-SummableSequence(...)`). Now, create a new sequence instance where `n=3` and the
-initial values are `(5, 7, 11)`; return the value of `new_seq(100000)`.  E.g.:
-
-```python
-class SummableSequence(object):
-
-    def __init__(self, *initial):
-        ...
-
-    def __call__(self, i):
-        ...
+* Export data (Database Query logs) from Teradata (relational database running in AWS) using REST API and generate file in json/parquet format.
+* Perform text analytics of SQL logs in Python and produce results.
+* Import the results in database. 
+* Why Python: Python is largely accepted language for data science and data analysis, and it has vast library to do the same. 
+It’s easy to debug and develop in local/dev environment Python  
 
 
-if __name__ == '__main__':
-    ...
-    new_seq = SummableSequence(5, 7, 11)
-    print(last_8(new_seq(100000)))
-```
+## Project Work
 
-***Make sure you apply your learnings from `optimized_fibonacci` to this
-class!*** We want this to be an efficient solution as well.
+### Development Artifacts: 
 
-Continue the implementation in [fibonacci.py](fibonacci.py).
+* Utilize Luigi for internal/external tasks scheduling. 
+* Utilize atomic write to convert JSON data to PARQUET and vice versa.
+* Utilize Python library (NumPy & Pandas) for text analytics of query logs. Python Classes will be utilized to Tokenize, Clean, Parse SQL Query Text.
+* Utilize Word2Vec for query text categorization/nearest neighbor based on given sample. 
+* Utilize REST API to export/import data from relational database (Teradata Vantage).
 
-## Other grading aspects
 
-These will be recurring standards for every problem set.  Please see rubrics in
-Canvas for up to date details.
 
-### Testing Quality
+#### Modules of Project:
 
-Take a look at the file [test_pset.py](test_pset.py).  It has unittests you can
-run with `python3 -m unittest` or `pytest`.  They all should pass!  Do not
-remove the existing test methods, but you are expected to add new ones to ensure
-your code is working properly.  Deciding exactly what tests to add, and how much
-coverage you need to achieve, is a decision you must make yourself for every
-pset - we will grade partially on whether or not you identify appropriate test
-cases.
+* EXPORT FROM DB USING REST API CALL /API Output:  JSON
+* Atomic Write JSON to PARQUET
+* SQL LOG TEXT Analytics in PYTHON Input Sample & SQL Log / Output Parquet summary
+* Atomic Write PARQUET to JSON
+* IMPORT DB REST API CALL: API INPUT: JSON, Output Database Table
 
-Try to ensure (the right) tests pass before you commit and merge/push new code
-on your master branch! This will help minimize the number of builds on the CI
-server.  That is, ***test locally*** first before committing, pushing, or
-merging to master.  This is good practice in general and will help with the
-shared resources.
 
-#### Test Coverage
+#### Task/Process Flow of Project 
 
-Travis/Code Climate will report overall test coverage if set up correctly; try
-to cover every major function and clause you write.  Travis will also display
-an output of coverage on the terminal.
 
-To help with your own development, you can use tools which show you exactly
-which lines are covered, eg:
 
-* [Run tests with coverage in Pycharm](https://www.jetbrains.com/help/pycharm/running-test-with-coverage.html)
-* Generate an html report directly with `pytest --cov-report html` then `open htmlcov/index.html`
 
-### Python Quality
+#### High Level Architecture Diagram
 
-We will comment on your overall quality of documentation, commenting,
-appropriate variable names, usage of higher-level code, etc.  Be sure to look at
-Code Climate reports to help you improve.
 
-### Git History
 
-Git commits should be logically structured, follow a branching model, etc.  Do
-not commit irrelevant files to the VCS (eg, anything under `__pycache__` or your
-editor/IDE configurations).  Never `git add *` or `git commit -a`!  They lump
-all your changes together; you want each commit to be a logical bit of history
-that captures what was done and why in a cohesive unit.
+
