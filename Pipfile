@@ -15,7 +15,12 @@ pandas = "*"
 xlrd = "*"
 pyarrow = "*"
 openpyxl = "*"
-
+fastapi ="*"
+teradatasql = "*"
+uvicorn = "*"
+requests = "*"
+luigi = "*"
+json2parquet = "*"
 
 [requires]
 python_version = "3.7"

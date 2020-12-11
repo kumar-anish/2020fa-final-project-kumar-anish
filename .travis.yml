@@ -35,5 +35,4 @@ jobs:
       # DO NOT commit these variables to git.
       - make data
       - python3 -m final_project
-        - python fibonacci.py
-        - python pyramid.py
+        - python api.py
