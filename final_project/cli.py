@@ -12,13 +12,13 @@ load_dotenv()
 
 def main(args=None):
 
-    # read in the hashed student data
+    # read query data in parquet
     data = load_data("data/query_logs.parquet")
 
     def my_distance(vec):
         return 1 - cosine_similarity(vec, my_embed_vec)
 
-    # read my sql keywords text from ENV variable "MY_SQL_QUERY_MATCH_TEXT" , since its not available in project.parquet
+    # read my sql keywords text from ENV variable "MY_SQL_QUERY_MATCH_TEXT" , to match with query_logs.parquet
     my_sql_match_text = os.environ.get('MY_SQL_QUERY_MATCH_TEXT')
 
     # utilize atomic_write to export results to data
@@ -39,7 +39,7 @@ def main(args=None):
 
 
     # find matching sqls with those keywords
-    # print a summary of yourself and the top 4 most similar query using these keywords
+    # print a summary of sql keywords and the top 4 most similar query using these keywords
     print('my_matched_sql_keywords_text:')
     print(my_sql_match_text)
     print('\n')
