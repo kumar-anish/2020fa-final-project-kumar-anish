@@ -15,7 +15,7 @@ class SqlQueryLog:
 
 
 sess = connect(Path("tdconn.json").read_text())
-app = FastAPI(title="QueryLog", description="Sample REST API Application")
+app = FastAPI(title="api", description="Final Project REST API Application")
 
 teradata_querylog_sql = """\
 SELECT TOP 100 QueryId

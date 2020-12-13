@@ -1,4 +1,6 @@
-from .cli import main
+from final_project import cli
+from final_project.load import load_query_result_file
 
 if __name__ == "__main__":
-    main()
+    cli.main()
+    load_query_result_file()
