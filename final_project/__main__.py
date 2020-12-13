@@ -1,4 +1,4 @@
-import uvicorn as uv
+from .cli import main
 
 if __name__ == "__main__":
-    uv.run("QueryLog:app", host='127.0.0.1', port=8080, reload=True)
+    main()

@@ -21,6 +21,9 @@ uvicorn = "*"
 requests = "*"
 luigi = "*"
 json2parquet = "*"
+dask = {extras = ["dataframe"], version = "*"}
+sqlalchemy = "*"
+teradatasqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
