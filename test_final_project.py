@@ -9,9 +9,9 @@ from tempfile import TemporaryDirectory
 from unittest import TestCase, mock
 import pandas as pd
 
-from ..__main__ import get_user_hash, excel_2_parquet
-from ..hash_str import hash_str
-from ..io import atomic_write
+from final_project.excel2parquet import excel_2_parquet
+from final_project.hash_str import hash_str
+from final_project.io import atomic_write
 
 
 class FakeFileFailure(IOError):
@@ -82,9 +82,6 @@ def get_excel_data(test_data):
 
 
 class MainTest(TestCase):
-    @mock.patch.dict(os.environ, {"CSCI_SALT": "123456"})
-    def test_get_user_hash(self):
-        self.assertEqual(get_user_hash("random").hex()[:8], "22f92796")
 
     def test_read_excel(self):
         test_data = {
