@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 from final_project.data import load_data
 from final_project.embedding import WordEmbedding, cosine_distance, delete_files, cosine_similarity
-from .io import atomic_write
+from final_project.io import atomic_write
 import csv
 load_dotenv()
 

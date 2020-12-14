@@ -37,7 +37,7 @@ def root() -> str:
     "Welcome page"
     return """\
 		<h1>Welcome to Final Project</h1>
-		<p>This is a sample Python application that uses Teradata database to fetch query logs to users via REST API</p>
+		<p>This is a final project Python application that uses Teradata database to export query logs to users via REST API</p>
 		"""
 
 

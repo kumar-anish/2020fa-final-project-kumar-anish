@@ -3,7 +3,8 @@ import csv
 from final_project import models
 from final_project.database import SessionLocal, engine
 
-def load_query_result_file():
+
+def main(args=None):
     db = SessionLocal()
 
     models.Base.metadata.create_all(bind=engine)
@@ -19,5 +20,9 @@ def load_query_result_file():
             db.add(db_record)
 
         db.commit()
-    print("loading csv results to database - end...")
+    print("loading csv results to database - done...")
     db.close()
+
+
+if __name__ == "__main__":
+    main()
