@@ -11,7 +11,7 @@
 ## SQL Query Log Analysis
 
 A CSCI E-29 Final Project that uses Teradata database SQL logs for text analytics using Word2Vec.
- Some details about the background is given below:
+ Some details about the background:
 * DBA is worried about performance of database since we are adding multiple applications and database features in Teradata Vantage. 
 * Some of the applications may be using SQL queries which are not optimized, 
 and some may be using new features of machine learning which may as well impact performance. 
@@ -91,6 +91,7 @@ Note: json2parq module was giving  error and due to time constants, data convers
    been tested on Teradata VM running locally.
    You can download teradata database from downloads.teradata.com. You need to enable Query logging for database user.
 3. Create a table in database to store summary results (Script is given below)
+
 CREATE SET TABLE QUERYRESULT ,NO FALLBACK ,
      NO BEFORE JOURNAL,
      NO AFTER JOURNAL,
@@ -102,13 +103,16 @@ CREATE SET TABLE QUERYRESULT ,NO FALLBACK ,
 CONSTRAINT MST_QUERYRESULT_PK PRIMARY KEY ( QUERYID ));
 3. Copy this repository (Clone or Copy)
 4. Define ENV variables (.env)
+
 CSCI_SALT=XXXXXXXXXXXXXXXXXXXXXXXXX
 AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXXXXXX
 AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXXXXXXX
 CI_USER_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXX
 MY_SQL_QUERY_MATCH_TEXT=NULLIFZERO SUM AVG TRIM FunctionName
 DB_CONN=teradatasql://usr1:pwd1@192.168.1.150
+
 5. For FastAPI, define tdconn.json at root level of project, sample content is below
+
 {"host": "192.168.1.150", "password": "pwd1", "user": "usr1"}
 
  
@@ -131,7 +135,7 @@ INFO:     Started server process [13904]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 
-### 3. Open a new terminal and run below command to export sql to json file using luigi
+### 3. Open a new terminal and run below command to export sql to json file using luigi & FastAPI
 * python run_luigi.py
 
 below is sample console output of luigi task:
@@ -178,7 +182,7 @@ This progress looks :) because there were no failed tasks or missing dependencie
 
 
 
-### 4. Run below python for text analyse using word2vec and produce summary csv file
+### 4. Run below python for text analyse using word2vec and produce summary of SQL results into a csv file
 * python cli.py
 
 it will product "query_result_file.csv" along with top 3 SQL Log matched with keyword
