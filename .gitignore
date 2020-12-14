@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-
+data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -115,4 +115,5 @@ venv.bak/
 coverage.xml
 .coverage
 htmlcov
+tdconn.json
 junk.py

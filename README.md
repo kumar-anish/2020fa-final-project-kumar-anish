@@ -178,7 +178,7 @@ This progress looks :) because there were no failed tasks or missing dependencie
 
 
 
-### 4. Run below python for text analyse using word2vec and product summary csv file
+### 4. Run below python for text analyse using word2vec and produce summary csv file
 * python cli.py
 
 it will product "query_result_file.csv" along with top 3 SQL Log matched with keyword
