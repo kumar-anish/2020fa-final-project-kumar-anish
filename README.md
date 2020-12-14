@@ -60,35 +60,37 @@ environment variable (MY_SQL_QUERY_MATCH_TEXT)
 
 #### Python Module Details:
 
-* api.py (FastAPI/ uvicorn implementation) EXPORT FROM DB USING REST API CALL /API Output:  JSON 
+* api.py 
+(FastAPI/ uvicorn implementation) EXPORT FROM DB USING REST API CALL /API Output:  JSON 
 HTTP GET REQUEST is /querylog/ which execute query to fetch top 100 recent database query logs
 Below is the Query details
+
 SELECT TOP 100 QueryId, QueryText
 FROM dbc.qrylog
 ORDER BY collecttimestamp desc
 
-* fastapi_client.py Usef for testing the rest service
+* fastapi_client.py Use for testing the rest service
 * tasks.py Luigi task which calls rest api and gives output of JSON file. /data/query_logs.json
 * json2parq.py Converts JSON to PARQUET 
 * excel2parq.py Converts Excel to PARQUET 
 * data.py loads Numpy array and words.txt along with SQL Query Text parquet file (Code Reuse)
-* cli.py SQL LOG TEXT Analytics (Word2Vec) in PYTHON Input Numpy array, Words.txt & SQL Log / Output CSV summary (Code Modifed)
+* cli.py SQL LOG TEXT Analytics (Word2Vec) in PYTHON Input Numpy array, Words.txt & SQL Log / Output CSV summary (Code Modified)
 * embedding.py (Code reuse by cli.py)
 * database.py  sqlalchemy database session management ( using env variable DB_CONN)
 * models.py sqlalchemy model for database table insert 
-* load.py  Write CSV result summary to Teradata databse (QUERYRESULT table)
+* load.py  Write CSV result summary to Teradata database (QUERYRESULT table)
 
-Note: json2parq module was giving  error and due to time constaints, data conversion was done using excel2parq. 
+Note: json2parq module was giving  error and due to time constants, data conversion was done using excel2parq. 
       excel was downloaded by running SQL query on Teradata Studio.
 
 
 ## Installation
-1. You need recenet version of Python (>=3.7)
+1. You need recent version of Python (>=3.7)
 2. Teradata Database ( for dev it can be running locally on a VM, e.g. VMWare Fusion) 
    You can configure Teradata database in AWS cloud for production. For final project, this has 
    been tested on Teradata VM running locally.
    You can download teradata database from downloads.teradata.com. You need enable Query logging for database user.
-3. Create a table in databse to store summary results (Script is given below)
+3. Create a table in database to store summary results (Script is given below)
 CREATE SET TABLE QUERYRESULT ,NO FALLBACK ,
      NO BEFORE JOURNAL,
      NO AFTER JOURNAL,
@@ -106,18 +108,18 @@ AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXXXXXXX
 CI_USER_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXX
 MY_SQL_QUERY_MATCH_TEXT=NULLIFZERO SUM AVG TRIM FunctionName
 DB_CONN=teradatasql://usr1:pwd1@192.168.1.150
-5. For FastAPI, define tdconn.json at root level of project, sample content is beklow
+5. For FastAPI, define tdconn.json at root level of project, sample content is below
 {"host": "192.168.1.150", "password": "pwd1", "user": "usr1"}
 
  
 ##  Running the Application
 Assumption: Teradata is already running locally (dev) or in AWS (production) and constains query logs of users in DBC tables.
 
-####1 run below commands for install and path setup
+### 1. Run below commands for install and path setup
 * pipenv install --dev
 * pipenv shell 
 
-####2 start Uvicorn server by running below command
+### 2. Start Uvicorn server by running below command
 * python final_project/api.py 
 
 Note: it will started on the console with the below statements on console. 
@@ -129,7 +131,7 @@ INFO:     Started server process [13904]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 
-####3 Open a new terminal and run below command to export sql to json file using luigi
+### 3. Open a new terminal and run below command to export sql to json file using luigi
 * python run_luigi.py
 
 below is sample console output of luigi task:
@@ -176,7 +178,7 @@ This progress looks :) because there were no failed tasks or missing dependencie
 
 
 
-####4 run below python for text analyse using word2vec and product summary csv file
+### 4. Run below python for text analyse using word2vec and product summary csv file
 * python cli.py
 
 it will product "query_result_file.csv" along with top 3 SQL Log matched with keyword
@@ -210,10 +212,10 @@ LOCK DBC.TableSizeV FOR ACCESS SELECT TableName, SUM(CurrentPerm) AS CurrentPerm
 
 
 
-####5 run below python file to upload the results to database (Tablename QUERYRESULT).
+### 5. Run below python file to upload the results to database (Tablename QUERYRESULT).
 * python load.py
 
-This will uplaod/insert cvs file to Teradata database table. You will see below statements on console:
+This will upload/insert cvs file to Teradata database table. You will see below statements on console:
 
 loading csv results to database - start...
 
