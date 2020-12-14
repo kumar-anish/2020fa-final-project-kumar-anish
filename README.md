@@ -89,7 +89,7 @@ Note: json2parq module was giving  error and due to time constants, data convers
 2. Teradata Database ( for dev it can be running locally on a VM, e.g. VMWare Fusion) 
    You can configure Teradata database in AWS cloud for production. For final project, this has 
    been tested on Teradata VM running locally.
-   You can download teradata database from downloads.teradata.com. You need enable Query logging for database user.
+   You can download teradata database from downloads.teradata.com. You need to enable Query logging for database user.
 3. Create a table in database to store summary results (Script is given below)
 CREATE SET TABLE QUERYRESULT ,NO FALLBACK ,
      NO BEFORE JOURNAL,
