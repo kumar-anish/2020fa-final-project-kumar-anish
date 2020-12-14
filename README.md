@@ -115,11 +115,11 @@ DB_CONN=teradatasql://usr1:pwd1@192.168.1.150
 ##  Running the Application
 Assumption: Teradata is already running locally (dev) or in AWS (production) and constains query logs of users in DBC tables.
 
-1. run below commands for install and path setup
+##### 1. run below commands for install and path setup
 * pipenv install --dev
 * pipenv shell 
 
-2. start Uvicorn server by running below command
+##### 2. start Uvicorn server by running below command
 * python final_project/api.py 
 
 Note: it will started on the console with the below statements on console. 
@@ -131,7 +131,7 @@ INFO:     Started server process [13904]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 
-3. Open a new terminal and run below command to export sql to json file using luigi
+##### 3. Open a new terminal and run below command to export sql to json file using luigi
 * python run_luigi.py
 
 below is sample console output of luigi task:
@@ -178,7 +178,7 @@ This progress looks :) because there were no failed tasks or missing dependencie
 
 
 
-4. run below python for text analyse using word2vec and product summary csv file
+##### 4. run below python for text analyse using word2vec and product summary csv file
 * python cli.py
 
 it will product "query_result_file.csv" along with top 3 SQL Log matched with keyword
@@ -212,7 +212,7 @@ LOCK DBC.TableSizeV FOR ACCESS SELECT TableName, SUM(CurrentPerm) AS CurrentPerm
 
 
 
-5. run below python file to upload the results to database (Tablename QUERYRESULT).
+##### 5. run below python file to upload the results to database (Tablename QUERYRESULT).
 * python load.py
 
 This will upload/insert cvs file to Teradata database table. You will see below statements on console:
