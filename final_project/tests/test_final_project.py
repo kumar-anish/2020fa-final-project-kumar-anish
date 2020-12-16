@@ -19,10 +19,22 @@ app = FastAPI()
 
 client = TestClient(app)
 
-def test_try():
-    resp = client.get("/")
-    assert resp.status_code == 200
-    #assert resp.json() == {"hello": "world"} # WORKS
+
+class ApiTests(TestClient):
+    def test_home_url(self):
+        response = self.client.get("/")
+        print(response.status_code)
+        self.assertEqual(response.status_code, 200)
+
+    def test_docs_url_exists(self):
+        response = self.client.get("/docs/")
+        print(response.status_code)
+        self.assertEqual(response.status_code, 200)
+
+    def test_docs_querylog_exists(self):
+        response = self.client.get("/querylog/")
+        print(response.status_code)
+        self.assertEqual(response.status_code, 200)
 
 
 class FakeFileFailure(IOError):
