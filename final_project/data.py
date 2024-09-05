@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-
+##add some comments
 def load_words(filename):
     """Load a file containing a list of words as a python list
 
